@@ -19,10 +19,18 @@ struct WindowProperties {
     var sampleCount: Int
 }
 
+struct RenderContext {
+    var commandEncoder: MTLRenderCommandEncoder
+    var commandBuffer: MTLCommandBuffer
+    var constantBufferPool: ConstantBufferPool
+    var windowProps: WindowProperties
+}
+
 class GameViewController: UIViewController, MTKViewDelegate {
     var device: MTLDevice! = nil
     
     var commandQueue: MTLCommandQueue! = nil
+    var constantBufferPool: ConstantBufferPool! = nil
     let inflightSemaphore = DispatchSemaphore(value: MaxBuffers)
     var bufferIndex = 0
     
@@ -57,6 +65,8 @@ class GameViewController: UIViewController, MTKViewDelegate {
         commandQueue = device.makeCommandQueue()
         commandQueue.label = "main command queue"
         
+        constantBufferPool = ConstantBufferPool(device)
+        
         scene = LevelScene(device: device, windowProps: windowProps)
     }
     
@@ -67,6 +77,8 @@ class GameViewController: UIViewController, MTKViewDelegate {
         
         let commandBuffer = commandQueue.makeCommandBuffer()
         commandBuffer.label = "Frame command buffer"
+        
+        constantBufferPool.aliasBuffers()
         
         // use completion handler to signal the semaphore when this frame is completed allowing the encoding of the next frame to proceed
         // use capture list to avoid any retain cycles if the command buffer gets retained anywhere besides this stack frame
@@ -81,13 +93,20 @@ class GameViewController: UIViewController, MTKViewDelegate {
             let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
             renderEncoder.label = "render encoder"
             
-            let projectionMatrix = Matrix4(
-                top: Float(windowProps.height),
-                right: Float(windowProps.width),
-                bottom: 0, left: 0, near: -1, far: 1
+            let projectionMatrix = float4x4.makeOrtho(
+                left: 0, right: Float(windowProps.width),
+                bottom: 0, top: Float(windowProps.height),
+                nearZ: -1, farZ: 1
             )
-            let viewMatrix = Matrix4.identity
-            scene.draw(commandEncoder: renderEncoder, windowProps: windowProps, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix)
+            let viewMatrix = float4x4(diagonal: float4(1.0))
+            
+            let renderContext = RenderContext(
+                commandEncoder: renderEncoder,
+                commandBuffer: commandBuffer,
+                constantBufferPool: constantBufferPool,
+                windowProps: windowProps
+            )
+            scene.draw(context: renderContext, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix)
             
             renderEncoder.endEncoding()
             commandBuffer.present(currentDrawable)

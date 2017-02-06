@@ -19,8 +19,8 @@
 		C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */; };
 		C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE21E490CCD004BBCDE /* LevelScene.swift */; };
 		C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */; };
-		C1052AE71E490D5F004BBCDE /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE61E490D5F004BBCDE /* VectorMath.swift */; };
 		C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */ = {isa = PBXBuildFile; fileRef = C1052AE91E490E63004BBCDE /* Mushroom.png */; };
+		C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AEB1E492FE2004BBCDE /* simd+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +38,8 @@
 		C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantBufferPool.swift; sourceTree = "<group>"; };
 		C1052AE21E490CCD004BBCDE /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEffectChain.swift; sourceTree = "<group>"; };
-		C1052AE61E490D5F004BBCDE /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
 		C1052AE91E490E63004BBCDE /* Mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mushroom.png; sourceTree = "<group>"; };
+		C1052AEB1E492FE2004BBCDE /* simd+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +90,6 @@
 				C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */,
 				C1052ACC1E490CB9004BBCDE /* AppDelegate.swift */,
 				C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */,
-				C1052AE61E490D5F004BBCDE /* VectorMath.swift */,
 				C1052ACE1E490CB9004BBCDE /* GameViewController.swift */,
 				C1052AD01E490CB9004BBCDE /* Shaders.metal */,
 				C1052AE21E490CCD004BBCDE /* LevelScene.swift */,
@@ -98,6 +97,7 @@
 				C1052AD51E490CB9004BBCDE /* Assets.xcassets */,
 				C1052AD71E490CB9004BBCDE /* LaunchScreen.storyboard */,
 				C1052ADA1E490CB9004BBCDE /* Info.plist */,
+				C1052AEB1E492FE2004BBCDE /* simd+ext.swift */,
 			);
 			path = Rifft;
 			sourceTree = "<group>";
@@ -184,8 +184,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1052AE71E490D5F004BBCDE /* VectorMath.swift in Sources */,
 				C1052AD11E490CB9004BBCDE /* Shaders.metal in Sources */,
+				C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */,
 				C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */,
 				C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */,
 				C1052ACF1E490CB9004BBCDE /* GameViewController.swift in Sources */,

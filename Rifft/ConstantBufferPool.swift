@@ -10,23 +10,51 @@ import Foundation
 import Metal
 
 class ConstantBufferPool {
-    private var heaps = [MTLCommandBuffer]()
-    private var commandBuffer: MTLCommandBuffer
+    private var heaps = [MTLHeap]()
+    private var buffers = [MTLBuffer]()
+    private var device: MTLDevice
+    public var heapSize = 1 * 1024 * 1024 // 1MB should be enough for constants
     
-    init(_ commandBuffer: MTLCommandBuffer) {
-        self.commandBuffer = commandBuffer
+    init(_ device: MTLDevice) {
+        self.device = device
     }
     
-    static private var bufferPools = [ObjectIdentifier: ConstantBufferPool]()
-    
-    static func getBufferPool(commandBuffer: MTLCommandBuffer) -> ConstantBufferPool {
-        let commandBufferId = ObjectIdentifier(commandBuffer)
-        let optionalBufferPool: ConstantBufferPool? = bufferPools[commandBufferId]
-        if let bufferPool = optionalBufferPool {
-            return bufferPool;
+    func aliasBuffers() {
+        for buffer in buffers {
+            buffer.makeAliasable()
         }
-        let bufferPool = ConstantBufferPool(commandBuffer)
-        bufferPools[commandBufferId] = bufferPool
-        return bufferPool
+        buffers.removeAll(keepingCapacity: true)
+    }
+    
+    func dequeueBuffer(length: Int) -> MTLBuffer {
+        let bufferOptions = MTLResourceOptions.cpuCacheModeWriteCombined.union(MTLResourceOptions.storageModeShared)
+        let sizeAndAlign = device.heapBufferSizeAndAlign(length: length, options: bufferOptions)
+        
+        for heap in heaps {
+            if heap.maxAvailableSize(alignment: sizeAndAlign.align) >= sizeAndAlign.size {
+                let buffer = heap.makeBuffer(length: length, options: bufferOptions)
+                buffers.append(buffer)
+                return buffer
+            }
+        }
+        
+        let heapDescriptor = MTLHeapDescriptor()
+        heapDescriptor.cpuCacheMode = MTLCPUCacheMode.writeCombined
+        heapDescriptor.storageMode = MTLStorageMode.shared
+        heapDescriptor.size = max(sizeAndAlign.size, heapSize)
+        
+        let heap = device.makeHeap(descriptor: heapDescriptor)
+        heaps.append(heap)
+        
+        let buffer = heap.makeBuffer(length: length, options: bufferOptions)
+        buffers.append(buffer)
+        return buffer
+    }
+    
+    func createBuffer<T>(data: T) -> MTLBuffer {
+        let size = MemoryLayout<T>.size
+        let buffer = dequeueBuffer(length: size)
+        buffer.contents().storeBytes(of: data, as: T.self)
+        return buffer
     }
 }

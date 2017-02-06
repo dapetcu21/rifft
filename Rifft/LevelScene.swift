@@ -12,9 +12,6 @@ import MetalKit
 class Sprite {
     var vertexBuffer: MTLBuffer
     var indexBuffer: MTLBuffer
-    var uniformBuffer: MTLBuffer
-    var uniformBufferRotation: Int = 4
-    var uniformBufferIndex: Int = 0
     var texture: MTLTexture
     
     
@@ -35,22 +32,28 @@ class Sprite {
         
         self.vertexBuffer = device.makeBuffer(bytes: vertexData, length: vertexData.count * MemoryLayout<Float>.size, options: [])
         self.indexBuffer = device.makeBuffer(bytes: indexData, length: indexData.count * MemoryLayout<Int16>.size, options: [])
-        self.uniformBuffer = device.makeBuffer(length: self.uniformBufferRotation * 256, options: [])
         self.texture = texture
     }
     
-    func draw(commandEncoder: MTLRenderCommandEncoder, projectionMatrix: Matrix4, viewMatrix: Matrix4, modelMatrix: Matrix4) {
-        let uniformIndex = self.uniformBufferIndex
-        let matrixSize = 16 * MemoryLayout<Float>.size
-        let uniformOffset = 256
-        let uniformMemory = self.uniformBuffer.contents() + uniformIndex * uniformOffset
-        memcpy(uniformMemory, projectionMatrix.toArray(), matrixSize)
-        memcpy(uniformMemory + matrixSize, viewMatrix.toArray(), matrixSize)
-        memcpy(uniformMemory + 2 * matrixSize, modelMatrix.toArray(), matrixSize)
-        self.uniformBufferIndex = (uniformIndex + 1) % self.uniformBufferRotation
+    func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
+        let commandEncoder = context.commandEncoder
+        
+        struct SpriteUniforms {
+            var projectionMatrix: float4x4
+            var viewMatrix: float4x4
+            var modelMatrix: float4x4
+        }
+        
+        
+        let uniforms = SpriteUniforms(
+            projectionMatrix: projectionMatrix,
+            viewMatrix: viewMatrix,
+            modelMatrix: modelMatrix
+        )
+        let uniformBuffer = context.constantBufferPool.createBuffer(data: uniforms)
         
         commandEncoder.setVertexBuffer(self.vertexBuffer, offset: 0, at: 0)
-        commandEncoder.setVertexBuffer(self.uniformBuffer, offset: uniformOffset * uniformIndex, at: 1)
+        commandEncoder.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
         commandEncoder.setFragmentTexture(texture, at: 0)
         commandEncoder.drawIndexedPrimitives(type: MTLPrimitiveType.triangle, indexCount: 6, indexType: MTLIndexType.uint16, indexBuffer: self.indexBuffer, indexBufferOffset: 0)
     }
@@ -78,14 +81,17 @@ class LevelScene {
         testSprite = Sprite(device: device, texture: testTexture)
     }
     
-    func draw(commandEncoder: MTLRenderCommandEncoder, windowProps: WindowProperties, projectionMatrix: Matrix4, viewMatrix: Matrix4) {
-        let modelMatrix = Matrix4(translation: Vector3(
+    func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4) {
+        let commandEncoder = context.commandEncoder
+        let windowProps = context.windowProps
+        
+        let modelMatrix = float4x4.makeTranslation(
             Float(windowProps.width) * 0.5,
             Float(windowProps.height) * 0.5,
             0
-        )) * Matrix4(scale: Vector3(0.5, 0.5, 0.5))
+        ) * float4x4.makeScale(0.5, 0.5, 0.5)
         
         commandEncoder.setRenderPipelineState(spritePipeline)
-        testSprite.draw(commandEncoder: commandEncoder, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix, modelMatrix: modelMatrix)
+        testSprite.draw(context: context, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix, modelMatrix: modelMatrix)
     }
 }
