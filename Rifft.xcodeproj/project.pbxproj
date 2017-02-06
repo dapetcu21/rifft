@@ -16,6 +16,11 @@
 		C1052AD41E490CB9004BBCDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1052AD21E490CB9004BBCDE /* Main.storyboard */; };
 		C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1052AD51E490CB9004BBCDE /* Assets.xcassets */; };
 		C1052AD91E490CB9004BBCDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1052AD71E490CB9004BBCDE /* LaunchScreen.storyboard */; };
+		C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */; };
+		C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE21E490CCD004BBCDE /* LevelScene.swift */; };
+		C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */; };
+		C1052AE71E490D5F004BBCDE /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE61E490D5F004BBCDE /* VectorMath.swift */; };
+		C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */ = {isa = PBXBuildFile; fileRef = C1052AE91E490E63004BBCDE /* Mushroom.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		C1052AD51E490CB9004BBCDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1052AD81E490CB9004BBCDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1052ADA1E490CB9004BBCDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantBufferPool.swift; sourceTree = "<group>"; };
+		C1052AE21E490CCD004BBCDE /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
+		C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEffectChain.swift; sourceTree = "<group>"; };
+		C1052AE61E490D5F004BBCDE /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
+		C1052AE91E490E63004BBCDE /* Mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mushroom.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +59,7 @@
 		C1052AB91E490CB9004BBCDE = {
 			isa = PBXGroup;
 			children = (
+				C1052AE81E490DEB004BBCDE /* Assets */,
 				C1052ACB1E490CB9004BBCDE /* Rifft */,
 				C1052AC41E490CB9004BBCDE /* Frameworks */,
 				C1052AC31E490CB9004BBCDE /* Products */,
@@ -76,15 +87,27 @@
 		C1052ACB1E490CB9004BBCDE /* Rifft */ = {
 			isa = PBXGroup;
 			children = (
+				C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */,
 				C1052ACC1E490CB9004BBCDE /* AppDelegate.swift */,
+				C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */,
+				C1052AE61E490D5F004BBCDE /* VectorMath.swift */,
 				C1052ACE1E490CB9004BBCDE /* GameViewController.swift */,
 				C1052AD01E490CB9004BBCDE /* Shaders.metal */,
+				C1052AE21E490CCD004BBCDE /* LevelScene.swift */,
 				C1052AD21E490CB9004BBCDE /* Main.storyboard */,
 				C1052AD51E490CB9004BBCDE /* Assets.xcassets */,
 				C1052AD71E490CB9004BBCDE /* LaunchScreen.storyboard */,
 				C1052ADA1E490CB9004BBCDE /* Info.plist */,
 			);
 			path = Rifft;
+			sourceTree = "<group>";
+		};
+		C1052AE81E490DEB004BBCDE /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C1052AE91E490E63004BBCDE /* Mushroom.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1052AD91E490CB9004BBCDE /* LaunchScreen.storyboard in Resources */,
+				C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */,
 				C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */,
 				C1052AD41E490CB9004BBCDE /* Main.storyboard in Resources */,
 			);
@@ -160,9 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1052AE71E490D5F004BBCDE /* VectorMath.swift in Sources */,
 				C1052AD11E490CB9004BBCDE /* Shaders.metal in Sources */,
+				C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */,
+				C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */,
 				C1052ACF1E490CB9004BBCDE /* GameViewController.swift in Sources */,
 				C1052ACD1E490CB9004BBCDE /* AppDelegate.swift in Sources */,
+				C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
