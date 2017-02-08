@@ -26,6 +26,7 @@
 		C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AF41E4B81AD004BBCDE /* GameState.swift */; };
 		C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AF61E4B8747004BBCDE /* Sprite.swift */; };
 		C1052AF91E4B892E004BBCDE /* oban.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C1052AF81E4B892E004BBCDE /* oban.m4a */; };
+		C12F2BF81E4BCCCE001E0B68 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BF71E4BCCCE001E0B68 /* AudioManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		C1052AF41E4B81AD004BBCDE /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		C1052AF61E4B8747004BBCDE /* Sprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		C1052AF81E4B892E004BBCDE /* oban.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = oban.m4a; sourceTree = "<group>"; };
+		C12F2BF71E4BCCCE001E0B68 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */,
 				C1052AF41E4B81AD004BBCDE /* GameState.swift */,
 				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
+				C12F2BF71E4BCCCE001E0B68 /* AudioManager.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				C1052AEE1E4B2195004BBCDE /* BackgroundGrid.swift in Sources */,
 				C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */,
 				C1052ACD1E490CB9004BBCDE /* AppDelegate.swift in Sources */,
+				C12F2BF81E4BCCCE001E0B68 /* AudioManager.swift in Sources */,
 				C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

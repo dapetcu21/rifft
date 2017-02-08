@@ -134,7 +134,7 @@ class GameViewController: UIViewController, MTKViewDelegate {
             
             let viewMatrix = float4x4.makeTranslation(0, 0, nearZ)
             
-            let timestamp = Date().timeIntervalSince1970
+            let timestamp = CACurrentMediaTime();
             
             let renderContext = RenderContext(
                 commandEncoder: renderEncoder,

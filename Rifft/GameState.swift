@@ -25,7 +25,7 @@ class GameState {
     var startTimestamp: TimeInterval
     
     init(_ levelName: String) {
-        startTimestamp = Date().timeIntervalSince1970
+        startTimestamp = 0.0
         loadStaticLevel(Bundle.main.url(forResource: levelName, withExtension: "json")!)
     }
     
