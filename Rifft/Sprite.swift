@@ -15,6 +15,7 @@ class Sprite {
     var indexBuffer: MTLBuffer
     var texture: MTLTexture
     var pipeline: MTLRenderPipelineState
+    var depthState: MTLDepthStencilState
     
     static func makePipeline(context: inout InitContext) -> MTLRenderPipelineState {
         let device = context.device
@@ -28,6 +29,7 @@ class Sprite {
         spritePipelineDescriptor.fragmentFunction = fragmentProgram
         spritePipelineDescriptor.colorAttachments[0].pixelFormat = windowProps.colorPixelFormat
         spritePipelineDescriptor.sampleCount = windowProps.sampleCount
+        spritePipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
         
         return try! device.makeRenderPipelineState(descriptor: spritePipelineDescriptor)
     }
@@ -53,6 +55,11 @@ class Sprite {
         self.indexBuffer = device.makeBuffer(bytes: indexData, length: indexData.count * MemoryLayout<Int16>.size, options: [])
         self.texture = texture
         self.pipeline = pipeline
+        
+        let depthDescriptor = MTLDepthStencilDescriptor()
+        depthDescriptor.depthCompareFunction = MTLCompareFunction.less
+        depthDescriptor.isDepthWriteEnabled = true
+        self.depthState = device.makeDepthStencilState(descriptor: depthDescriptor)
     }
     
     func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
@@ -73,6 +80,7 @@ class Sprite {
         let uniformBuffer = context.constantBufferPool.createBuffer(data: uniforms)
         
         commandEncoder.setRenderPipelineState(pipeline)
+        commandEncoder.setDepthStencilState(depthState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         commandEncoder.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
         commandEncoder.setFragmentTexture(texture, at: 0)

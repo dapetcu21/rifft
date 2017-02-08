@@ -16,6 +16,7 @@ struct WindowProperties {
     var width: Int
     var height: Int
     var colorPixelFormat: MTLPixelFormat
+    var depthPixelFormat: MTLPixelFormat
     var sampleCount: Int
 }
 
@@ -75,6 +76,7 @@ class GameViewController: UIViewController, MTKViewDelegate {
             width: Int(view.bounds.width),
             height: Int(view.bounds.height),
             colorPixelFormat: view.colorPixelFormat,
+            depthPixelFormat: view.depthStencilPixelFormat,
             sampleCount: view.sampleCount
         )
         
