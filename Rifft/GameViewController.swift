@@ -24,6 +24,7 @@ struct RenderContext {
     var commandBuffer: MTLCommandBuffer
     var constantBufferPool: ConstantBufferPool
     var windowProps: WindowProperties
+    var presentationTimestamp: Double
 }
 
 class GameViewController: UIViewController, MTKViewDelegate {
@@ -100,13 +101,17 @@ class GameViewController: UIViewController, MTKViewDelegate {
             )
             let viewMatrix = float4x4(diagonal: float4(1.0))
             
+            let timestamp = Date().timeIntervalSince1970
+            
             let renderContext = RenderContext(
                 commandEncoder: renderEncoder,
                 commandBuffer: commandBuffer,
                 constantBufferPool: constantBufferPool,
-                windowProps: windowProps
+                windowProps: windowProps,
+                presentationTimestamp: timestamp
             )
             scene.draw(context: renderContext, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix)
+            
             
             renderEncoder.endEncoding()
             commandBuffer.present(currentDrawable)

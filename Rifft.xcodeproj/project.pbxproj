@@ -21,6 +21,11 @@
 		C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */; };
 		C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */ = {isa = PBXBuildFile; fileRef = C1052AE91E490E63004BBCDE /* Mushroom.png */; };
 		C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AEB1E492FE2004BBCDE /* simd+ext.swift */; };
+		C1052AEE1E4B2195004BBCDE /* BackgroundGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */; };
+		C1052AF31E4B73DD004BBCDE /* oban.json in Resources */ = {isa = PBXBuildFile; fileRef = C1052AF21E4B73DD004BBCDE /* oban.json */; };
+		C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AF41E4B81AD004BBCDE /* GameState.swift */; };
+		C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AF61E4B8747004BBCDE /* Sprite.swift */; };
+		C1052AF91E4B892E004BBCDE /* oban.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C1052AF81E4B892E004BBCDE /* oban.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEffectChain.swift; sourceTree = "<group>"; };
 		C1052AE91E490E63004BBCDE /* Mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mushroom.png; sourceTree = "<group>"; };
 		C1052AEB1E492FE2004BBCDE /* simd+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd+ext.swift"; sourceTree = "<group>"; };
+		C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundGrid.swift; sourceTree = "<group>"; };
+		C1052AF21E4B73DD004BBCDE /* oban.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oban.json; sourceTree = "<group>"; };
+		C1052AF41E4B81AD004BBCDE /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		C1052AF61E4B8747004BBCDE /* Sprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
+		C1052AF81E4B892E004BBCDE /* oban.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = oban.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +69,6 @@
 		C1052AB91E490CB9004BBCDE = {
 			isa = PBXGroup;
 			children = (
-				C1052AE81E490DEB004BBCDE /* Assets */,
 				C1052ACB1E490CB9004BBCDE /* Rifft */,
 				C1052AC41E490CB9004BBCDE /* Frameworks */,
 				C1052AC31E490CB9004BBCDE /* Products */,
@@ -87,17 +96,10 @@
 		C1052ACB1E490CB9004BBCDE /* Rifft */ = {
 			isa = PBXGroup;
 			children = (
-				C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */,
-				C1052ACC1E490CB9004BBCDE /* AppDelegate.swift */,
-				C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */,
-				C1052ACE1E490CB9004BBCDE /* GameViewController.swift */,
-				C1052AD01E490CB9004BBCDE /* Shaders.metal */,
-				C1052AE21E490CCD004BBCDE /* LevelScene.swift */,
-				C1052AD21E490CB9004BBCDE /* Main.storyboard */,
-				C1052AD51E490CB9004BBCDE /* Assets.xcassets */,
-				C1052AD71E490CB9004BBCDE /* LaunchScreen.storyboard */,
-				C1052ADA1E490CB9004BBCDE /* Info.plist */,
-				C1052AEB1E492FE2004BBCDE /* simd+ext.swift */,
+				C1052AF11E4B2208004BBCDE /* Boilerplate */,
+				C1052AE81E490DEB004BBCDE /* Assets */,
+				C1052AF01E4B21C6004BBCDE /* App */,
+				C1052AEF1E4B219C004BBCDE /* Engine */,
 			);
 			path = Rifft;
 			sourceTree = "<group>";
@@ -105,9 +107,47 @@
 		C1052AE81E490DEB004BBCDE /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C1052AF81E4B892E004BBCDE /* oban.m4a */,
 				C1052AE91E490E63004BBCDE /* Mushroom.png */,
+				C1052AF21E4B73DD004BBCDE /* oban.json */,
 			);
 			name = Assets;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C1052AEF1E4B219C004BBCDE /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				C1052ACE1E490CB9004BBCDE /* GameViewController.swift */,
+				C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */,
+				C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */,
+				C1052AD01E490CB9004BBCDE /* Shaders.metal */,
+				C1052AEB1E492FE2004BBCDE /* simd+ext.swift */,
+			);
+			name = Engine;
+			sourceTree = "<group>";
+		};
+		C1052AF01E4B21C6004BBCDE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C1052AE21E490CCD004BBCDE /* LevelScene.swift */,
+				C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */,
+				C1052AF41E4B81AD004BBCDE /* GameState.swift */,
+				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		C1052AF11E4B2208004BBCDE /* Boilerplate */ = {
+			isa = PBXGroup;
+			children = (
+				C1052ACC1E490CB9004BBCDE /* AppDelegate.swift */,
+				C1052AD21E490CB9004BBCDE /* Main.storyboard */,
+				C1052AD51E490CB9004BBCDE /* Assets.xcassets */,
+				C1052AD71E490CB9004BBCDE /* LaunchScreen.storyboard */,
+				C1052ADA1E490CB9004BBCDE /* Info.plist */,
+			);
+			name = Boilerplate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +213,8 @@
 				C1052AD91E490CB9004BBCDE /* LaunchScreen.storyboard in Resources */,
 				C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */,
 				C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */,
+				C1052AF31E4B73DD004BBCDE /* oban.json in Resources */,
+				C1052AF91E4B892E004BBCDE /* oban.m4a in Resources */,
 				C1052AD41E490CB9004BBCDE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,11 +226,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */,
 				C1052AD11E490CB9004BBCDE /* Shaders.metal in Sources */,
 				C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */,
 				C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */,
 				C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */,
 				C1052ACF1E490CB9004BBCDE /* GameViewController.swift in Sources */,
+				C1052AEE1E4B2195004BBCDE /* BackgroundGrid.swift in Sources */,
+				C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */,
 				C1052ACD1E490CB9004BBCDE /* AppDelegate.swift in Sources */,
 				C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */,
 			);
@@ -352,6 +397,7 @@
 				C1052ADF1E490CB9004BBCDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
