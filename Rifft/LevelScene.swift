@@ -10,26 +10,33 @@ import Foundation
 import MetalKit
 
 class LevelScene {
-    var testSprite: Sprite
+    var noteRenderer: Sprite
     var gameState: GameState
     
-    init(device: MTLDevice, windowProps: WindowProperties) {
+    init(context: inout InitContext) {
         gameState = GameState("oban")
         
         let textureURL = Bundle.main.url(forResource: "Mushroom", withExtension: "png")!
-        let testTexture = try! MTKTextureLoader(device: device).newTexture(withContentsOf: textureURL, options: [:])
-        testSprite = Sprite(device: device, windowProps: windowProps, texture: testTexture)
+        let testTexture = try! MTKTextureLoader(device: context.device).newTexture(withContentsOf: textureURL, options: [:])
+        
+        let spritePipeline = Sprite.makePipeline(context: &context)
+        noteRenderer = Sprite(pipeline: spritePipeline, texture: testTexture)
     }
     
     func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4) {
         let windowProps = context.windowProps
         
-        let modelMatrix = float4x4.makeTranslation(
-            Float(windowProps.width) * 0.5,
-            Float(windowProps.height) * 0.5,
-            0
-        ) * float4x4.makeScale(0.5, 0.5, 0.5)
+        let aspectRatio = Float(windowProps.width) / Float(windowProps.height)
+        let elapsedTime = context.presentationTimestamp - gameState.startTimestamp
         
-        testSprite.draw(context: context, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix, modelMatrix: modelMatrix)
+        
+        for note in gameState.notes {
+            let noteZ = Float(note.timestamp - elapsedTime)
+            
+            let modelMatrix = float4x4.makeTranslation(note.x * aspectRatio, note.y, noteZ) *
+                float4x4.makeScale(0.001, 0.001, 0.001)
+            
+            noteRenderer.draw(context: context, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix, modelMatrix: modelMatrix)
+        }
     }
 }

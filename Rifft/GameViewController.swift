@@ -27,6 +27,21 @@ struct RenderContext {
     var presentationTimestamp: Double
 }
 
+struct InitContext {
+    var device: MTLDevice
+    var windowProps: WindowProperties
+    var library: MTLLibrary
+    var functions: [String: MTLFunction]
+    
+    mutating func getFunction(name: String) -> MTLFunction {
+        var f = functions[name]
+        if f != nil { return f! }
+        f = library.makeFunction(name: name)
+        functions[name] = f
+        return f!
+    }
+}
+
 class GameViewController: UIViewController, MTKViewDelegate {
     var device: MTLDevice! = nil
     
@@ -68,7 +83,13 @@ class GameViewController: UIViewController, MTKViewDelegate {
         
         constantBufferPool = ConstantBufferPool(device)
         
-        scene = LevelScene(device: device, windowProps: windowProps)
+        var initContext = InitContext(
+            device: device,
+            windowProps: windowProps,
+            library: device.newDefaultLibrary()!,
+            functions: [:]
+        )
+        scene = LevelScene(context: &initContext)
     }
     
     func draw(in view: MTKView) {
@@ -94,12 +115,22 @@ class GameViewController: UIViewController, MTKViewDelegate {
             let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
             renderEncoder.label = "render encoder"
             
-            let projectionMatrix = float4x4.makeOrtho(
-                left: 0, right: Float(windowProps.width),
-                bottom: 0, top: Float(windowProps.height),
-                nearZ: -1, farZ: 1
-            )
-            let viewMatrix = float4x4(diagonal: float4(1.0))
+            let aspect = Float(windowProps.width) / Float(windowProps.height)
+            let nearZ = 1.5 / tanf(30.0 * Float(M_PI) / 180.0)
+            
+            // Metal uses [0, 1] for its Z coordinate and makeFrustum assumes [-1, 1]
+            // We have to adjust for that
+            let projectionMatrix = float4x4.makeTranslation(0, 0, 0.5) *
+                float4x4.makeScale(1, 1, 0.5) *
+                float4x4.makeFrustum(
+                    left: aspect * -1.5, right: aspect * 1.5,
+                    bottom: -1.5, top: 1.5,
+                    nearZ: nearZ, farZ: nearZ + 100
+                ) *
+                float4x4.makeScale(1, 1, -1) // We prefer +Z into the screen
+            
+            
+            let viewMatrix = float4x4.makeTranslation(0, 0, nearZ)
             
             let timestamp = Date().timeIntervalSince1970
             
