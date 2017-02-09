@@ -14,6 +14,7 @@ class LevelScene {
     var gridRenderer: BackgroundGrid
     var gameState: GameState
     var audioManager: AudioManager
+    var touchRecognizer: TouchRecognizer
     
     init(context: InitContext) {
         let notePipeline = Note.makePipeline(context: context)
@@ -24,6 +25,9 @@ class LevelScene {
         
         let gameState = GameState("oban")
         self.gameState = gameState
+        
+        touchRecognizer = TouchRecognizer(gameState: gameState, target: nil, action: nil)
+        context.view.addGestureRecognizer(touchRecognizer)
         
         let delay = 5.0
         gameState.startTimestamp = CACurrentMediaTime() + delay
@@ -56,8 +60,16 @@ class LevelScene {
             
             let modelMatrix = float4x4.makeTranslation(note.x * aspectRatio, note.y, noteZ)
             
+            var color = note.shield == .left ? float4(1.0, 0.0, 0.0, 1.0) : float4(0.0, 0.0, 1.0, 1.0)
             
-            let color = note.shield == .left ? float4(1.0, 0.0, 0.0, 1.0) : float4(0.0, 0.0, 1.0, 1.0)
+            let lightUpDistance = Note.sphereRadius * 4.0
+            
+            if noteZ < lightUpDistance && (
+                gameState.testShieldCollision(.left, note: note) ||
+                gameState.testShieldCollision(.right, note: note)) {
+                let alpha: Float = max(0.0, noteZ / lightUpDistance)
+                color = mix(float4(1.0, 1.0, 1.0, 1.0), color, t: alpha)
+            }
             
             noteRenderer.draw(
                 context: context,

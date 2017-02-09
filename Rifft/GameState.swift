@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import simd
+import MetalKit
 
 class GameState {
     enum Shield: Int {
@@ -23,6 +25,14 @@ class GameState {
     var notes: [Note] = []
     var musicUrl: URL!
     var startTimestamp: TimeInterval
+    
+    struct ShieldState {
+        var position = float2()
+        var active: Bool = false
+        var timestamp: TimeInterval = 0.0
+    }
+    var shields = [ShieldState(), ShieldState()]
+    static let shieldRadius: Float = 0.5
     
     init(_ levelName: String) {
         startTimestamp = 0.0
@@ -54,5 +64,16 @@ class GameState {
                 }
             }
         }
+    }
+    
+    func testShieldCollision(_ shield: Shield, note: Note) -> Bool {
+        let state = shields[shield.rawValue]
+        let radiusSquared = GameState.shieldRadius * GameState.shieldRadius
+        return state.active && simd.distance_squared(float2(note.x, note.y), state.position) <= radiusSquared
+    }
+    
+    func updateShield(_ shield: Shield, active: Bool, position: float2, timestamp: TimeInterval) {
+        let state = ShieldState(position: position, active: active, timestamp: timestamp)
+        shields[shield.rawValue] = state
     }
 }

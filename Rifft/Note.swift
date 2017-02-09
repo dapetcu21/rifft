@@ -17,6 +17,8 @@ class Note {
     var depthState: MTLDepthStencilState
     var indexCount: Int
     
+    static let sphereRadius: Float = 0.3
+    
     static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
@@ -37,7 +39,6 @@ class Note {
     init(pipeline: MTLRenderPipelineState) {
         let longitudeSegments = 20
         let latitudeSegments = 10
-        let sphereRadius: Float = 0.3
         
         var vertexData: [Float] = []
         var indexData: [Int16] = []
@@ -61,7 +62,7 @@ class Note {
                     cosOmega * cosAlpha,
                     cosOmega * sinAlpha,
                     sinOmega
-                ) * sphereRadius
+                ) * Note.sphereRadius
                 
                 vertexData += [vertex.x, vertex.y, vertex.z]
                 if i != 0 {

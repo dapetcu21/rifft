@@ -30,6 +30,7 @@
 		C12F2BFC1E4C9B2C001E0B68 /* oban.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */; };
 		C12F2BFE1E4CA00A001E0B68 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BFD1E4CA00A001E0B68 /* Note.swift */; };
 		C12F2C001E4CA019001E0B68 /* Note.metal in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BFF1E4CA019001E0B68 /* Note.metal */; };
+		C12F2C021E4CC80F001E0B68 /* TouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oban.mp3; sourceTree = "<group>"; };
 		C12F2BFD1E4CA00A001E0B68 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		C12F2BFF1E4CA019001E0B68 /* Note.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Note.metal; sourceTree = "<group>"; };
+		C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				C12F2BFD1E4CA00A001E0B68 /* Note.swift */,
 				C1052AD01E490CB9004BBCDE /* Sprite.metal */,
 				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
+				C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				C12F2BFE1E4CA00A001E0B68 /* Note.swift in Sources */,
 				C1052ACF1E490CB9004BBCDE /* GameViewController.swift in Sources */,
 				C1052AEE1E4B2195004BBCDE /* BackgroundGrid.swift in Sources */,
+				C12F2C021E4CC80F001E0B68 /* TouchRecognizer.swift in Sources */,
 				C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */,
 				C1052ACD1E490CB9004BBCDE /* AppDelegate.swift in Sources */,
 				C12F2BFA1E4C815C001E0B68 /* BackgroundGrid.metal in Sources */,
