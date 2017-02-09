@@ -61,6 +61,9 @@ class LevelScene {
         
         for note in gameState.notes {
             let noteZ = Float(note.timestamp - elapsedTime) * noteVelocity
+            if noteZ < -Note.sphereRadius || noteZ > 20.0 + Note.sphereRadius {
+                continue
+            }
             
             let modelMatrix = float4x4.makeTranslation(note.x * aspectRatio, note.y, noteZ)
             
