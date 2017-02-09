@@ -29,47 +29,45 @@ class Shield {
         let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
         spritePipelineDescriptor.vertexFunction = vertexProgram
         spritePipelineDescriptor.fragmentFunction = fragmentProgram
-        spritePipelineDescriptor.colorAttachments[0].pixelFormat = windowProps.colorPixelFormat
         spritePipelineDescriptor.sampleCount = windowProps.sampleCount
         spritePipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
+        
+        let renderbufferAttachment = spritePipelineDescriptor.colorAttachments[0]!
+        renderbufferAttachment.pixelFormat = windowProps.colorPixelFormat
+        renderbufferAttachment.isBlendingEnabled = true
+        renderbufferAttachment.rgbBlendOperation = .add
+        renderbufferAttachment.alphaBlendOperation = .add
+        renderbufferAttachment.sourceRGBBlendFactor = .sourceAlpha
+        renderbufferAttachment.sourceAlphaBlendFactor = .sourceAlpha
+        renderbufferAttachment.destinationRGBBlendFactor = .oneMinusSourceAlpha
+        renderbufferAttachment.destinationAlphaBlendFactor = .oneMinusSourceAlpha
         
         return try! device.makeRenderPipelineState(descriptor: spritePipelineDescriptor)
     }
     
     init(pipeline: MTLRenderPipelineState) {
-        let longitudeSegments = 20
-        let latitudeSegments = 10
+        let longitudeSegments = 40
         
-        var vertexData: [Float] = []
+        var vertexData: [Float] = [0.0, 0.0, 0.0]
         var indexData: [Int16] = []
-        var currentVertex: Int16 = 0
+        var currentVertex: Int16 = 1
         
-        for i in 0...latitudeSegments {
-            let omega: Float = Float(i) * (Float(M_PI) / Float(latitudeSegments)) - Float(M_PI_2)
-            let sinOmega = sinf(omega)
-            let cosOmega = cosf(omega)
+        for i in 0...longitudeSegments {
+            let alpha: Float = Float(i) * (2.0 * Float(M_PI) / Float(longitudeSegments))
+            let vertex = float3(sinf(alpha), cosf(alpha), 0.0)
+            let outVertex = vertex * GameState.shieldRadius
+            let inVertex = vertex * (GameState.shieldRadius - 0.1)
             
-            if i > 1 {
-                // Add a break in the triangle strip
-                indexData += [ indexData.last!, currentVertex ]
-            }
-            
-            for j in 0...longitudeSegments {
-                let alpha: Float = Float(j) * (2.0 * Float(M_PI) / Float(longitudeSegments))
-                let sinAlpha = sinf(alpha)
-                let cosAlpha = cosf(alpha)
-                let vertex = float3(
-                    cosOmega * cosAlpha,
-                    cosOmega * sinAlpha,
-                    sinOmega
-                ) * Note.sphereRadius
-                
-                vertexData += [vertex.x, vertex.y, vertex.z]
-                if i != 0 {
-                    indexData += [ currentVertex, currentVertex - longitudeSegments - 1 ]
-                }
-                currentVertex += 1
-            }
+            vertexData += [
+                outVertex.x, outVertex.y, outVertex.z,
+                inVertex.x, inVertex.y, inVertex.z
+            ]
+            indexData += [currentVertex, 0]
+            currentVertex += 2
+        }
+        indexData += [0, 1]
+        for i in 0...longitudeSegments {
+            indexData += [Int16(i * 2 + 1), Int16(i * 2 + 2)]
         }
         indexCount = indexData.count
         
@@ -80,8 +78,8 @@ class Shield {
         self.pipeline = pipeline
         
         let depthDescriptor = MTLDepthStencilDescriptor()
-        depthDescriptor.depthCompareFunction = MTLCompareFunction.less
-        depthDescriptor.isDepthWriteEnabled = true
+        depthDescriptor.depthCompareFunction = MTLCompareFunction.always
+        depthDescriptor.isDepthWriteEnabled = false
         self.depthState = device.makeDepthStencilState(descriptor: depthDescriptor)
     }
     
