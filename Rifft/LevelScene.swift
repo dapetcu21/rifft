@@ -15,11 +15,11 @@ class LevelScene {
     var gameState: GameState
     var audioManager: AudioManager
     
-    init(context: inout InitContext) {
-        let notePipeline = Note.makePipeline(context: &context)
+    init(context: InitContext) {
+        let notePipeline = Note.makePipeline(context: context)
         noteRenderer = Note(pipeline: notePipeline)
         
-        let gridPipeline = BackgroundGrid.makePipeline(context: &context)
+        let gridPipeline = BackgroundGrid.makePipeline(context: context)
         gridRenderer = BackgroundGrid(pipeline: gridPipeline, windowProps: context.windowProps)
         
         let gameState = GameState("oban")

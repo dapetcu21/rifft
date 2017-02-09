@@ -17,12 +17,12 @@ class Note {
     var depthState: MTLDepthStencilState
     var indexCount: Int
     
-    static func makePipeline(context: inout InitContext) -> MTLRenderPipelineState {
+    static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
         
-        let fragmentProgram = context.getFunction(name: "noteFragment")
-        let vertexProgram = context.getFunction(name: "noteVertex")
+        let fragmentProgram = context.functionCache.getFunction(name: "noteFragment")
+        let vertexProgram = context.functionCache.getFunction(name: "noteVertex")
         
         let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
         spritePipelineDescriptor.vertexFunction = vertexProgram

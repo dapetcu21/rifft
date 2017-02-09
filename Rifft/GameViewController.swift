@@ -22,25 +22,35 @@ struct WindowProperties {
 
 struct RenderContext {
     var commandEncoder: MTLRenderCommandEncoder
-    var commandBuffer: MTLCommandBuffer
     var constantBufferPool: ConstantBufferPool
     var windowProps: WindowProperties
     var presentationTimestamp: Double
+    var commandBuffer: MTLCommandBuffer
 }
 
 struct InitContext {
     var device: MTLDevice
     var windowProps: WindowProperties
-    var library: MTLLibrary
-    var functions: [String: MTLFunction]
     
-    mutating func getFunction(name: String) -> MTLFunction {
-        var f = functions[name]
-        if f != nil { return f! }
-        f = library.makeFunction(name: name)
-        functions[name] = f
-        return f!
+    class FunctionCache {
+        var library: MTLLibrary
+        var functions: [String: MTLFunction] = [:]
+        
+        init(library: MTLLibrary) {
+            self.library = library
+        }
+        
+        func getFunction(name: String) -> MTLFunction {
+            var f = functions[name]
+            if f != nil { return f! }
+            f = library.makeFunction(name: name)
+            functions[name] = f
+            return f!
+        }
     }
+    
+    var functionCache: FunctionCache
+    var view: MTKView
 }
 
 class GameViewController: UIViewController, MTKViewDelegate {
@@ -85,13 +95,13 @@ class GameViewController: UIViewController, MTKViewDelegate {
         
         constantBufferPool = ConstantBufferPool(device)
         
-        var initContext = InitContext(
+        let initContext = InitContext(
             device: device,
             windowProps: windowProps,
-            library: device.newDefaultLibrary()!,
-            functions: [:]
+            functionCache: InitContext.FunctionCache(library: device.newDefaultLibrary()!),
+            view: view
         )
-        scene = LevelScene(context: &initContext)
+        scene = LevelScene(context: initContext)
     }
     
     func draw(in view: MTKView) {
@@ -138,10 +148,10 @@ class GameViewController: UIViewController, MTKViewDelegate {
             
             let renderContext = RenderContext(
                 commandEncoder: renderEncoder,
-                commandBuffer: commandBuffer,
                 constantBufferPool: constantBufferPool,
                 windowProps: windowProps,
-                presentationTimestamp: timestamp
+                presentationTimestamp: timestamp,
+                commandBuffer: commandBuffer
             )
             scene.draw(context: renderContext, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix)
             

@@ -17,12 +17,12 @@ class Sprite {
     var pipeline: MTLRenderPipelineState
     var depthState: MTLDepthStencilState
     
-    static func makePipeline(context: inout InitContext) -> MTLRenderPipelineState {
+    static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
         
-        let fragmentProgram = context.getFunction(name: "spriteFragment")
-        let vertexProgram = context.getFunction(name: "spriteVertex")
+        let fragmentProgram = context.functionCache.getFunction(name: "spriteFragment")
+        let vertexProgram = context.functionCache.getFunction(name: "spriteVertex")
         
         let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
         spritePipelineDescriptor.vertexFunction = vertexProgram

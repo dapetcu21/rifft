@@ -17,12 +17,12 @@ class BackgroundGrid {
     var depthState: MTLDepthStencilState
     var indexCount: Int
     
-    static func makePipeline(context: inout InitContext) -> MTLRenderPipelineState {
+    static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
         
-        let fragmentProgram = context.getFunction(name: "gridFragment")
-        let vertexProgram = context.getFunction(name: "gridVertex")
+        let fragmentProgram = context.functionCache.getFunction(name: "gridFragment")
+        let vertexProgram = context.functionCache.getFunction(name: "gridVertex")
         
         let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
         spritePipelineDescriptor.vertexFunction = vertexProgram
