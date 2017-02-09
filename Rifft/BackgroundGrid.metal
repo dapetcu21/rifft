@@ -50,5 +50,5 @@ vertex GridVertexOut gridVertex(uint vid [[ vertex_id ]],
 
 fragment float4 gridFragment(GridVertexOut inFrag [[stage_in]])
 {
-    return float4(1.0, 1.0, 1.0, 1.0);
+    return float4(1.0, 1.0, 1.0, 1.0) * (1 - inFrag.position.z * 1.1);
 };

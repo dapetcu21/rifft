@@ -129,7 +129,7 @@ class GameViewController: UIViewController, MTKViewDelegate {
                 float4x4.makeFrustum(
                     left: aspect * -1.5, right: aspect * 1.5,
                     bottom: -1.5, top: 1.5,
-                    nearZ: nearZ, farZ: nearZ + 100
+                    nearZ: nearZ, farZ: nearZ + 20
                 ) *
                 float4x4.makeScale(1, 1, -1) // We prefer +Z into the screen
             

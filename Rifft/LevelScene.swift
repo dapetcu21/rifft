@@ -10,17 +10,14 @@ import Foundation
 import MetalKit
 
 class LevelScene {
-    var noteRenderer: Sprite
+    var noteRenderer: Note
     var gridRenderer: BackgroundGrid
     var gameState: GameState
     var audioManager: AudioManager
     
     init(context: inout InitContext) {
-        let textureURL = Bundle.main.url(forResource: "Mushroom", withExtension: "png")!
-        let testTexture = try! MTKTextureLoader(device: context.device).newTexture(withContentsOf: textureURL, options: [:])
-        
-        let spritePipeline = Sprite.makePipeline(context: &context)
-        noteRenderer = Sprite(pipeline: spritePipeline, texture: testTexture)
+        let notePipeline = Note.makePipeline(context: &context)
+        noteRenderer = Note(pipeline: notePipeline)
         
         let gridPipeline = BackgroundGrid.makePipeline(context: &context)
         gridRenderer = BackgroundGrid(pipeline: gridPipeline, windowProps: context.windowProps)
@@ -45,7 +42,7 @@ class LevelScene {
         
         let aspectRatio = Float(windowProps.width) / Float(windowProps.height)
         let elapsedTime = context.presentationTimestamp - gameState.startTimestamp
-        let noteVelocity: Float = 2.0
+        let noteVelocity: Float = 4.0
         
         gridRenderer.draw(
             context: context,
@@ -57,11 +54,14 @@ class LevelScene {
         for note in gameState.notes {
             let noteZ = Float(note.timestamp - elapsedTime) * noteVelocity
             
-            let modelMatrix = float4x4.makeTranslation(note.x * aspectRatio, note.y, noteZ) *
-                float4x4.makeScale(0.001, 0.001, 0.001)
+            let modelMatrix = float4x4.makeTranslation(note.x * aspectRatio, note.y, noteZ)
+            
+            
+            let color = note.shield == .left ? float4(1.0, 0.0, 0.0, 1.0) : float4(0.0, 0.0, 1.0, 1.0)
             
             noteRenderer.draw(
                 context: context,
+                color: color,
                 projectionMatrix: projectionMatrix,
                 viewMatrix: viewMatrix,
                 modelMatrix: modelMatrix
