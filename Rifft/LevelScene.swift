@@ -64,9 +64,7 @@ class LevelScene {
             
             let lightUpDistance = Note.sphereRadius * 4.0
             
-            if noteZ < lightUpDistance && (
-                gameState.testShieldCollision(.left, note: note) ||
-                gameState.testShieldCollision(.right, note: note)) {
+            if noteZ < lightUpDistance && gameState.testShieldCollision(note.shield, note: note) {
                 let alpha: Float = max(0.0, noteZ / lightUpDistance)
                 color = mix(float4(1.0, 1.0, 1.0, 1.0), color, t: alpha)
             }
