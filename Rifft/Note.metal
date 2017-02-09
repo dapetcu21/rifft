@@ -37,5 +37,5 @@ vertex NoteVertexOut noteVertex(uint vid [[ vertex_id ]],
 fragment float4 noteFragment(NoteVertexOut inFrag [[stage_in]],
                              constant NoteUniformData *uniforms [[ buffer(0) ]])
 {
-    return uniforms->color * (1 - inFrag.position.z);
+    return uniforms->color * min(1.0, 1.5 - inFrag.position.z * 1.5);
 };
