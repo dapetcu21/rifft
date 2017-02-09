@@ -31,6 +31,7 @@
 		C12F2BFE1E4CA00A001E0B68 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BFD1E4CA00A001E0B68 /* Note.swift */; };
 		C12F2C001E4CA019001E0B68 /* Note.metal in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BFF1E4CA019001E0B68 /* Note.metal */; };
 		C12F2C021E4CC80F001E0B68 /* TouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */; };
+		C1E4F14B1E4CE6DE00D6584C /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4F14A1E4CE6DE00D6584C /* Shield.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		C12F2BFD1E4CA00A001E0B68 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		C12F2BFF1E4CA019001E0B68 /* Note.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Note.metal; sourceTree = "<group>"; };
 		C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchRecognizer.swift; sourceTree = "<group>"; };
+		C1E4F14A1E4CE6DE00D6584C /* Shield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */,
 				C12F2BFF1E4CA019001E0B68 /* Note.metal */,
 				C12F2BFD1E4CA00A001E0B68 /* Note.swift */,
+				C1E4F14A1E4CE6DE00D6584C /* Shield.swift */,
 				C1052AD01E490CB9004BBCDE /* Sprite.metal */,
 				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
 				C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */,
@@ -241,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1E4F14B1E4CE6DE00D6584C /* Shield.swift in Sources */,
 				C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */,
 				C1052AD11E490CB9004BBCDE /* Sprite.metal in Sources */,
 				C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */,

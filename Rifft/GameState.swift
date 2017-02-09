@@ -13,6 +13,7 @@ import MetalKit
 class GameState {
     enum Shield: Int {
         case left = 0, right = 1;
+        static let allValues = [left, right]
     }
     
     struct Note {

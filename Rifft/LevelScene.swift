@@ -11,6 +11,7 @@ import MetalKit
 
 class LevelScene {
     var noteRenderer: Note
+    var shieldRenderer: Shield
     var gridRenderer: BackgroundGrid
     var gameState: GameState
     var audioManager: AudioManager
@@ -19,6 +20,9 @@ class LevelScene {
     init(context: InitContext) {
         let notePipeline = Note.makePipeline(context: context)
         noteRenderer = Note(pipeline: notePipeline)
+        
+        let shieldPipeline = Shield.makePipeline(context: context)
+        shieldRenderer = Shield(pipeline: shieldPipeline)
         
         let gridPipeline = BackgroundGrid.makePipeline(context: context)
         gridRenderer = BackgroundGrid(pipeline: gridPipeline, windowProps: context.windowProps)
@@ -70,6 +74,23 @@ class LevelScene {
             }
             
             noteRenderer.draw(
+                context: context,
+                color: color,
+                projectionMatrix: projectionMatrix,
+                viewMatrix: viewMatrix,
+                modelMatrix: modelMatrix
+            )
+        }
+        
+        for shield in GameState.Shield.allValues {
+            let state = gameState.shields[shield.rawValue]
+            if !state.active { continue }
+            
+            let modelMatrix = float4x4.makeTranslation(state.position.x * aspectRatio, state.position.y, 0.0)
+            
+            let color = shield == .left ? float4(1.0, 0.0, 0.0, 0.5) : float4(0.0, 0.0, 1.0, 0.5)
+            
+            shieldRenderer.draw(
                 context: context,
                 color: color,
                 projectionMatrix: projectionMatrix,
