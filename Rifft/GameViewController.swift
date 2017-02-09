@@ -80,7 +80,7 @@ class GameViewController: UIViewController, MTKViewDelegate {
         let view = self.view as! MTKView
         view.delegate = self
         view.device = device
-        view.sampleCount = 1
+        view.sampleCount = 4
         
         windowProps = WindowProperties(
             width: Int(view.bounds.width),
