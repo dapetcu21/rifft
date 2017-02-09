@@ -11,6 +11,7 @@ import MetalKit
 
 class LevelScene {
     var noteRenderer: Sprite
+    var gridRenderer: BackgroundGrid
     var gameState: GameState
     var audioManager: AudioManager
     
@@ -21,10 +22,13 @@ class LevelScene {
         let spritePipeline = Sprite.makePipeline(context: &context)
         noteRenderer = Sprite(pipeline: spritePipeline, texture: testTexture)
         
+        let gridPipeline = BackgroundGrid.makePipeline(context: &context)
+        gridRenderer = BackgroundGrid(pipeline: gridPipeline, windowProps: context.windowProps)
+        
         let gameState = GameState("oban")
         self.gameState = gameState
         
-        let delay = 2.0
+        let delay = 5.0
         gameState.startTimestamp = CACurrentMediaTime() + delay
         
         audioManager = AudioManager(
@@ -43,6 +47,12 @@ class LevelScene {
         let elapsedTime = context.presentationTimestamp - gameState.startTimestamp
         let noteVelocity: Float = 2.0
         
+        gridRenderer.draw(
+            context: context,
+            projectionMatrix: projectionMatrix,
+            viewMatrix: viewMatrix,
+            modelMatrix: float4x4(diagonal: float4(1.0))
+        )
         
         for note in gameState.notes {
             let noteZ = Float(note.timestamp - elapsedTime) * noteVelocity
@@ -50,7 +60,12 @@ class LevelScene {
             let modelMatrix = float4x4.makeTranslation(note.x * aspectRatio, note.y, noteZ) *
                 float4x4.makeScale(0.001, 0.001, 0.001)
             
-            noteRenderer.draw(context: context, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix, modelMatrix: modelMatrix)
+            noteRenderer.draw(
+                context: context,
+                projectionMatrix: projectionMatrix,
+                viewMatrix: viewMatrix,
+                modelMatrix: modelMatrix
+            )
         }
     }
 }

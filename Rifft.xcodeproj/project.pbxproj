@@ -12,7 +12,7 @@
 		C1052ACA1E490CB9004BBCDE /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1052AC91E490CB9004BBCDE /* ModelIO.framework */; };
 		C1052ACD1E490CB9004BBCDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052ACC1E490CB9004BBCDE /* AppDelegate.swift */; };
 		C1052ACF1E490CB9004BBCDE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052ACE1E490CB9004BBCDE /* GameViewController.swift */; };
-		C1052AD11E490CB9004BBCDE /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C1052AD01E490CB9004BBCDE /* Shaders.metal */; };
+		C1052AD11E490CB9004BBCDE /* Sprite.metal in Sources */ = {isa = PBXBuildFile; fileRef = C1052AD01E490CB9004BBCDE /* Sprite.metal */; };
 		C1052AD41E490CB9004BBCDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1052AD21E490CB9004BBCDE /* Main.storyboard */; };
 		C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1052AD51E490CB9004BBCDE /* Assets.xcassets */; };
 		C1052AD91E490CB9004BBCDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1052AD71E490CB9004BBCDE /* LaunchScreen.storyboard */; };
@@ -25,8 +25,9 @@
 		C1052AF31E4B73DD004BBCDE /* oban.json in Resources */ = {isa = PBXBuildFile; fileRef = C1052AF21E4B73DD004BBCDE /* oban.json */; };
 		C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AF41E4B81AD004BBCDE /* GameState.swift */; };
 		C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1052AF61E4B8747004BBCDE /* Sprite.swift */; };
-		C1052AF91E4B892E004BBCDE /* oban.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C1052AF81E4B892E004BBCDE /* oban.m4a */; };
 		C12F2BF81E4BCCCE001E0B68 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BF71E4BCCCE001E0B68 /* AudioManager.swift */; };
+		C12F2BFA1E4C815C001E0B68 /* BackgroundGrid.metal in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BF91E4C815C001E0B68 /* BackgroundGrid.metal */; };
+		C12F2BFC1E4C9B2C001E0B68 /* oban.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,7 @@
 		C1052AC91E490CB9004BBCDE /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		C1052ACC1E490CB9004BBCDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1052ACE1E490CB9004BBCDE /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		C1052AD01E490CB9004BBCDE /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		C1052AD01E490CB9004BBCDE /* Sprite.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Sprite.metal; sourceTree = "<group>"; };
 		C1052AD31E490CB9004BBCDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C1052AD51E490CB9004BBCDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1052AD81E490CB9004BBCDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,8 +51,9 @@
 		C1052AF21E4B73DD004BBCDE /* oban.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oban.json; sourceTree = "<group>"; };
 		C1052AF41E4B81AD004BBCDE /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		C1052AF61E4B8747004BBCDE /* Sprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
-		C1052AF81E4B892E004BBCDE /* oban.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = oban.m4a; sourceTree = "<group>"; };
 		C12F2BF71E4BCCCE001E0B68 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		C12F2BF91E4C815C001E0B68 /* BackgroundGrid.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BackgroundGrid.metal; sourceTree = "<group>"; };
+		C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oban.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +111,7 @@
 		C1052AE81E490DEB004BBCDE /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				C1052AF81E4B892E004BBCDE /* oban.m4a */,
+				C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */,
 				C1052AE91E490E63004BBCDE /* Mushroom.png */,
 				C1052AF21E4B73DD004BBCDE /* oban.json */,
 			);
@@ -123,7 +125,6 @@
 				C1052ACE1E490CB9004BBCDE /* GameViewController.swift */,
 				C1052AE41E490CD3004BBCDE /* PostEffectChain.swift */,
 				C1052AE01E490CC4004BBCDE /* ConstantBufferPool.swift */,
-				C1052AD01E490CB9004BBCDE /* Shaders.metal */,
 				C1052AEB1E492FE2004BBCDE /* simd+ext.swift */,
 			);
 			name = Engine;
@@ -132,11 +133,13 @@
 		C1052AF01E4B21C6004BBCDE /* App */ = {
 			isa = PBXGroup;
 			children = (
-				C1052AE21E490CCD004BBCDE /* LevelScene.swift */,
-				C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */,
-				C1052AF41E4B81AD004BBCDE /* GameState.swift */,
-				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
 				C12F2BF71E4BCCCE001E0B68 /* AudioManager.swift */,
+				C1052AF41E4B81AD004BBCDE /* GameState.swift */,
+				C1052AE21E490CCD004BBCDE /* LevelScene.swift */,
+				C12F2BF91E4C815C001E0B68 /* BackgroundGrid.metal */,
+				C1052AED1E4B2194004BBCDE /* BackgroundGrid.swift */,
+				C1052AD01E490CB9004BBCDE /* Sprite.metal */,
+				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -217,7 +220,7 @@
 				C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */,
 				C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */,
 				C1052AF31E4B73DD004BBCDE /* oban.json in Resources */,
-				C1052AF91E4B892E004BBCDE /* oban.m4a in Resources */,
+				C12F2BFC1E4C9B2C001E0B68 /* oban.mp3 in Resources */,
 				C1052AD41E490CB9004BBCDE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,7 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */,
-				C1052AD11E490CB9004BBCDE /* Shaders.metal in Sources */,
+				C1052AD11E490CB9004BBCDE /* Sprite.metal in Sources */,
 				C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */,
 				C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */,
 				C1052AE51E490CD3004BBCDE /* PostEffectChain.swift in Sources */,
@@ -238,6 +241,7 @@
 				C1052AEE1E4B2195004BBCDE /* BackgroundGrid.swift in Sources */,
 				C1052AF51E4B81AD004BBCDE /* GameState.swift in Sources */,
 				C1052ACD1E490CB9004BBCDE /* AppDelegate.swift in Sources */,
+				C12F2BFA1E4C815C001E0B68 /* BackgroundGrid.metal in Sources */,
 				C12F2BF81E4BCCCE001E0B68 /* AudioManager.swift in Sources */,
 				C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */,
 			);

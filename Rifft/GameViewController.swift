@@ -95,6 +95,8 @@ class GameViewController: UIViewController, MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
+        // TODO: Use CADisplayLink's timestamp for more precise timing
+        let timestamp = CACurrentMediaTime() + 1.0 / 60.0;
         
         // use semaphore to encode one frame ahead
         let _ = inflightSemaphore.wait(timeout: DispatchTime.distantFuture)
@@ -133,8 +135,6 @@ class GameViewController: UIViewController, MTKViewDelegate {
             
             
             let viewMatrix = float4x4.makeTranslation(0, 0, nearZ)
-            
-            let timestamp = CACurrentMediaTime();
             
             let renderContext = RenderContext(
                 commandEncoder: renderEncoder,
