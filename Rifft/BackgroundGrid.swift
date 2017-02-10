@@ -9,6 +9,7 @@
 import Foundation
 import Metal
 import simd
+import QuartzCore
 
 class BackgroundGrid {
     var vertexBuffer: MTLBuffer
@@ -16,6 +17,7 @@ class BackgroundGrid {
     var pipeline: MTLRenderPipelineState
     var depthState: MTLDepthStencilState
     var indexCount: Int
+    var startTime: Double
     
     static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
@@ -34,11 +36,13 @@ class BackgroundGrid {
         return try! device.makeRenderPipelineState(descriptor: spritePipelineDescriptor)
     }
     
+    static let depth: Float = 10.0
+    
     init(pipeline: MTLRenderPipelineState, windowProps: WindowProperties) {
         let aspect = Float(windowProps.width) / Float(windowProps.height)
         let halfW: Float = 1.5 * aspect
         let halfH: Float = 1.5
-        let depth: Float = 10.0
+        let depth: Float = BackgroundGrid.depth
         
         let heightSegments = 4
         let widthSegments = Int(roundf(Float(heightSegments) * aspect))
@@ -93,6 +97,7 @@ class BackgroundGrid {
         }
         
         indexCount = indexData.count
+        startTime = CACurrentMediaTime()
         
         let device = pipeline.device
         
@@ -113,14 +118,16 @@ class BackgroundGrid {
             var mvpMatrix: float4x4
             var pixelWidth: Float
             var pixelHeight: Float
-            var padding: float2
+            var depth: Float
+            var time: Float
         }
         
         let uniforms = GridUniforms(
             mvpMatrix: projectionMatrix * viewMatrix * modelMatrix,
             pixelWidth: 2.0 / Float(context.windowProps.width),
             pixelHeight: 2.0 / Float(context.windowProps.height),
-            padding: float2()
+            depth: BackgroundGrid.depth,
+            time: Float(context.presentationTimestamp - startTime)
         )
         let uniformBuffer = context.constantBufferPool.createBuffer(data: uniforms)
         
@@ -128,6 +135,7 @@ class BackgroundGrid {
         commandEncoder.setDepthStencilState(depthState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         commandEncoder.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
+        commandEncoder.setFragmentBuffer(uniformBuffer, offset: 0, at: 0)
         commandEncoder.drawIndexedPrimitives(type: MTLPrimitiveType.triangle, indexCount: indexCount, indexType: MTLIndexType.uint16, indexBuffer: indexBuffer, indexBufferOffset: 0)
     }
 }
