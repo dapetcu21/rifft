@@ -56,6 +56,6 @@ fragment float4 gridFragment(GridVertexOut inFrag [[stage_in]],
                              constant GridUniformData *uniforms [[ buffer(0) ]])
 {
     float fog = (1.0 - inFrag.depth / uniforms->depth);
-    float modulation = 1.0 + 0.5 * max(0.0, sin(inFrag.depth + uniforms->time * 2.0));
+    float modulation = 1.2 + 0.4 * sin(inFrag.depth + uniforms->time * 2.0); 
     return float4(0.8, 0.8, 0.8, 1.0) * fog * modulation;
 };
