@@ -19,21 +19,21 @@ class BackgroundGrid {
     var indexCount: Int
     var startTime: Double
     
-    static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
+    static func makePipeline(_ context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
         
-        let fragmentProgram = context.functionCache.getFunction(name: "gridFragment")
-        let vertexProgram = context.functionCache.getFunction(name: "gridVertex")
+        let fragmentProgram = context.functionCache.getFunction("gridFragment")
+        let vertexProgram = context.functionCache.getFunction("gridVertex")
         
-        let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
-        spritePipelineDescriptor.vertexFunction = vertexProgram
-        spritePipelineDescriptor.fragmentFunction = fragmentProgram
-        spritePipelineDescriptor.colorAttachments[0].pixelFormat = windowProps.colorPixelFormat
-        spritePipelineDescriptor.sampleCount = windowProps.sampleCount
-        spritePipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexProgram
+        pipelineDescriptor.fragmentFunction = fragmentProgram
+        pipelineDescriptor.colorAttachments[0].pixelFormat = windowProps.colorPixelFormat
+        pipelineDescriptor.sampleCount = windowProps.sampleCount
+        pipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
         
-        return try! device.makeRenderPipelineState(descriptor: spritePipelineDescriptor)
+        return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     
     static let depth: Float = 10.0
@@ -53,7 +53,7 @@ class BackgroundGrid {
         var indexData: [Int16] = []
         var currentVertex: Int16 = 0
         
-        func drawLine(from: float3, to: float3) {
+        func drawLine(_ from: float3, to: float3) {
             let direction = simd.normalize(to - from)
             vertexData += [
                 from.x, from.y, from.z, direction.x, direction.y, direction.z,
@@ -70,29 +70,29 @@ class BackgroundGrid {
         
         for i in 0...widthSegments {
             let x = Float(i) * (halfW * 2.0 / Float(widthSegments)) - halfW
-            drawLine(from: float3(x, halfH, 0),
+            drawLine(float3(x, halfH, 0),
                      to: float3(x, halfH, depth))
-            drawLine(from: float3(x, -halfH, 0),
+            drawLine(float3(x, -halfH, 0),
                      to: float3(x, -halfH, depth))
         }
         
         for i in 1..<heightSegments {
             let y = Float(i) * (halfH * 2.0 / Float(heightSegments)) - halfH
-            drawLine(from: float3(halfW, y, 0),
+            drawLine(float3(halfW, y, 0),
                      to: float3(halfW, y, depth))
-            drawLine(from: float3(-halfW, y, 0),
+            drawLine(float3(-halfW, y, 0),
                      to: float3(-halfW, y, depth))
         }
         
         for i in 1...depthSegments {
             let z = Float(i) * (depth / Float(depthSegments))
-            drawLine(from: float3(-halfW, -halfH, z),
+            drawLine(float3(-halfW, -halfH, z),
                      to: float3(-halfW, halfH, z))
-            drawLine(from: float3(halfW, -halfH, z),
+            drawLine(float3(halfW, -halfH, z),
                      to: float3(halfW, halfH, z))
-            drawLine(from: float3(-halfW, -halfH, z),
+            drawLine(float3(-halfW, -halfH, z),
                      to: float3(halfW, -halfH, z))
-            drawLine(from: float3(-halfW, halfH, z),
+            drawLine(float3(-halfW, halfH, z),
                      to: float3(halfW, halfH, z))
         }
         
@@ -111,7 +111,7 @@ class BackgroundGrid {
         self.depthState = device.makeDepthStencilState(descriptor: depthDescriptor)
     }
     
-    func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
+    func draw(_ context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
         let commandEncoder = context.commandEncoder
         
         struct GridUniforms {
@@ -129,7 +129,7 @@ class BackgroundGrid {
             depth: BackgroundGrid.depth,
             time: Float(context.presentationTimestamp - startTime)
         )
-        let uniformBuffer = context.constantBufferPool.createBuffer(data: uniforms)
+        let uniformBuffer = context.constantBufferPool.createBuffer(uniforms)
         
         commandEncoder.setRenderPipelineState(pipeline)
         commandEncoder.setDepthStencilState(depthState)

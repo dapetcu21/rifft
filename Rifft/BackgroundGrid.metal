@@ -30,8 +30,8 @@ struct GridUniformData {
 };
 
 vertex GridVertexOut gridVertex(uint vid [[ vertex_id ]],
-                              device GridVertexIn *vertices  [[ buffer(0) ]],
-                              constant GridUniformData *uniforms [[ buffer(1) ]])
+                                device GridVertexIn *vertices  [[ buffer(0) ]],
+                                constant GridUniformData *uniforms [[ buffer(1) ]])
 {
     GridVertexOut outVertex;
     float4x4 mvp = uniforms->mvp;

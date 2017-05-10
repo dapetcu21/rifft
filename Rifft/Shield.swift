@@ -19,20 +19,20 @@ class Shield {
     
     static let sphereRadius: Float = 0.3
     
-    static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
+    static func makePipeline(_ context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
         
-        let fragmentProgram = context.functionCache.getFunction(name: "noteFragment")
-        let vertexProgram = context.functionCache.getFunction(name: "noteVertex")
+        let fragmentProgram = context.functionCache.getFunction("noteFragment")
+        let vertexProgram = context.functionCache.getFunction("noteVertex")
         
-        let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
-        spritePipelineDescriptor.vertexFunction = vertexProgram
-        spritePipelineDescriptor.fragmentFunction = fragmentProgram
-        spritePipelineDescriptor.sampleCount = windowProps.sampleCount
-        spritePipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexProgram
+        pipelineDescriptor.fragmentFunction = fragmentProgram
+        pipelineDescriptor.sampleCount = windowProps.sampleCount
+        pipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
         
-        let renderbufferAttachment = spritePipelineDescriptor.colorAttachments[0]!
+        let renderbufferAttachment = pipelineDescriptor.colorAttachments[0]!
         renderbufferAttachment.pixelFormat = windowProps.colorPixelFormat
         renderbufferAttachment.isBlendingEnabled = true
         renderbufferAttachment.rgbBlendOperation = .add
@@ -42,7 +42,7 @@ class Shield {
         renderbufferAttachment.destinationRGBBlendFactor = .oneMinusSourceAlpha
         renderbufferAttachment.destinationAlphaBlendFactor = .oneMinusSourceAlpha
         
-        return try! device.makeRenderPipelineState(descriptor: spritePipelineDescriptor)
+        return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     
     init(pipeline: MTLRenderPipelineState) {
@@ -83,7 +83,7 @@ class Shield {
         self.depthState = device.makeDepthStencilState(descriptor: depthDescriptor)
     }
     
-    func draw(context: RenderContext, color: float4, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
+    func draw(_ context: RenderContext, color: float4, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
         let commandEncoder = context.commandEncoder
         
         struct Uniforms {
@@ -95,7 +95,7 @@ class Shield {
             mvpMatrix: projectionMatrix * viewMatrix * modelMatrix,
             color: color
         )
-        let uniformBuffer = context.constantBufferPool.createBuffer(data: uniforms)
+        let uniformBuffer = context.constantBufferPool.createBuffer(uniforms)
         
         commandEncoder.setRenderPipelineState(pipeline)
         commandEncoder.setDepthStencilState(depthState)

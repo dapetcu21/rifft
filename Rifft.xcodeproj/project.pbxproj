@@ -31,6 +31,8 @@
 		C12F2BFE1E4CA00A001E0B68 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BFD1E4CA00A001E0B68 /* Note.swift */; };
 		C12F2C001E4CA019001E0B68 /* Note.metal in Sources */ = {isa = PBXBuildFile; fileRef = C12F2BFF1E4CA019001E0B68 /* Note.metal */; };
 		C12F2C021E4CC80F001E0B68 /* TouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */; };
+		C199F6851EC3561A00C50ED4 /* lemon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C199F6841EC3561A00C50ED4 /* lemon.mp3 */; };
+		C1A456151EC23EC200137B1C /* OnsetDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A456141EC23EC200137B1C /* OnsetDetection.swift */; };
 		C1E4F14B1E4CE6DE00D6584C /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4F14A1E4CE6DE00D6584C /* Shield.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 		C12F2BFD1E4CA00A001E0B68 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		C12F2BFF1E4CA019001E0B68 /* Note.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Note.metal; sourceTree = "<group>"; };
 		C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchRecognizer.swift; sourceTree = "<group>"; };
+		C199F6841EC3561A00C50ED4 /* lemon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lemon.mp3; sourceTree = "<group>"; };
+		C1A456141EC23EC200137B1C /* OnsetDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnsetDetection.swift; sourceTree = "<group>"; };
 		C1E4F14A1E4CE6DE00D6584C /* Shield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +123,7 @@
 		C1052AE81E490DEB004BBCDE /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C199F6841EC3561A00C50ED4 /* lemon.mp3 */,
 				C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */,
 				C1052AE91E490E63004BBCDE /* Mushroom.png */,
 				C1052AF21E4B73DD004BBCDE /* oban.json */,
@@ -152,6 +157,7 @@
 				C1052AD01E490CB9004BBCDE /* Sprite.metal */,
 				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
 				C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */,
+				C1A456141EC23EC200137B1C /* OnsetDetection.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 					C1052AC11E490CB9004BBCDE = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 24K34WY4S4;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -229,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1052AD91E490CB9004BBCDE /* LaunchScreen.storyboard in Resources */,
+				C199F6851EC3561A00C50ED4 /* lemon.mp3 in Resources */,
 				C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */,
 				C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */,
 				C1052AF31E4B73DD004BBCDE /* oban.json in Resources */,
@@ -259,6 +267,7 @@
 				C12F2BFA1E4C815C001E0B68 /* BackgroundGrid.metal in Sources */,
 				C12F2C001E4CA019001E0B68 /* Note.metal in Sources */,
 				C12F2BF81E4BCCCE001E0B68 /* AudioManager.swift in Sources */,
+				C1A456151EC23EC200137B1C /* OnsetDetection.swift in Sources */,
 				C1052AE31E490CCD004BBCDE /* LevelScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

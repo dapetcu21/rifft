@@ -9,6 +9,7 @@
 import Foundation
 import simd
 import MetalKit
+import GameplayKit
 
 class GameState {
     enum Shield: Int {
@@ -37,7 +38,31 @@ class GameState {
     
     init(_ levelName: String) {
         startTimestamp = 0.0
-        loadStaticLevel(Bundle.main.url(forResource: levelName, withExtension: "json")!)
+//        loadStaticLevel(Bundle.main.url(forResource: levelName, withExtension: "json")!)
+        
+        let musicUrl = Bundle.main.url(forResource: "oban", withExtension: "mp3")!
+        loadGeneratedLevel(musicUrl)
+    }
+    
+    func loadGeneratedLevel(_ url: URL) {
+        do {
+            self.musicUrl = url
+            let onsetList = try getOnsetListFromMusic(url)
+            
+            var i = 0
+            for onset in onsetList {
+                i = 1 - i
+                let note = Note(
+                    timestamp: Double(onset.timestamp),
+                    shield: /* GameState.Shield(rawValue: i)!, */ GameState.Shield(rawValue: GKRandomSource.sharedRandom().nextInt(upperBound: 2))!,
+                    x: /* 0.0, */ GKRandomSource.sharedRandom().nextUniform() * 2.0 - 1.0,
+                    y: /* -1.0 */ GKRandomSource.sharedRandom().nextUniform() * 2.0 - 1.0
+                )
+                notes.append(note)
+            }
+        } catch {
+            print(error)
+        }
     }
     
     func loadStaticLevel(_ url: URL) {

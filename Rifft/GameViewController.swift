@@ -40,7 +40,7 @@ struct InitContext {
             self.library = library
         }
         
-        func getFunction(name: String) -> MTLFunction {
+        func getFunction(_ name: String) -> MTLFunction {
             var f = functions[name]
             if f != nil { return f! }
             f = library.makeFunction(name: name)
@@ -137,7 +137,7 @@ class GameViewController: UIViewController, MTKViewDelegate {
             let projectionMatrix = float4x4.makeTranslation(0, 0, 0.5) *
                 float4x4.makeScale(1, 1, 0.5) *
                 float4x4.makeFrustum(
-                    left: aspect * -1.5, right: aspect * 1.5,
+                    aspect * -1.5, right: aspect * 1.5,
                     bottom: -1.5, top: 1.5,
                     nearZ: nearZ, farZ: nearZ + 20
                 ) *
@@ -153,7 +153,7 @@ class GameViewController: UIViewController, MTKViewDelegate {
                 presentationTimestamp: timestamp,
                 commandBuffer: commandBuffer
             )
-            scene.draw(context: renderContext, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix)
+            scene.draw(renderContext, projectionMatrix: projectionMatrix, viewMatrix: viewMatrix)
             
             
             renderEncoder.endEncoding()

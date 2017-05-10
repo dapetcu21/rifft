@@ -10,10 +10,10 @@ import Foundation
 import Metal
 
 class ConstantBufferPool {
-    private var heaps = [MTLHeap]()
-    private var buffers = [MTLBuffer]()
-    private var device: MTLDevice
-    public var heapSize = 1 * 1024 * 1024 // 1MB should be enough for constants
+    fileprivate var heaps = [MTLHeap]()
+    fileprivate var buffers = [MTLBuffer]()
+    fileprivate var device: MTLDevice
+    open var heapSize = 1 * 1024 * 1024 // 1MB should be enough for constants
     
     init(_ device: MTLDevice) {
         self.device = device
@@ -26,7 +26,7 @@ class ConstantBufferPool {
         buffers.removeAll(keepingCapacity: true)
     }
     
-    func dequeueBuffer(length: Int) -> MTLBuffer {
+    func dequeueBuffer(_ length: Int) -> MTLBuffer {
         let bufferOptions = MTLResourceOptions.cpuCacheModeWriteCombined.union(MTLResourceOptions.storageModeShared)
         let sizeAndAlign = device.heapBufferSizeAndAlign(length: length, options: bufferOptions)
         
@@ -51,9 +51,9 @@ class ConstantBufferPool {
         return buffer
     }
     
-    func createBuffer<T>(data: T) -> MTLBuffer {
+    func createBuffer<T>(_ data: T) -> MTLBuffer {
         let size = MemoryLayout<T>.size
-        let buffer = dequeueBuffer(length: size)
+        let buffer = dequeueBuffer(size)
         buffer.contents().storeBytes(of: data, as: T.self)
         return buffer
     }

@@ -24,7 +24,7 @@ class PostEffectChain {
         self.windowProps = windowProps
     }
     
-    func addEffect(effect: PostEffect) {
+    func addEffect(_ effect: PostEffect) {
         if effects.count < 2 {
             let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(
                 pixelFormat: windowProps.colorPixelFormat,
@@ -44,7 +44,7 @@ class PostEffectChain {
         }
     }
     
-    func draw(commandEncoder: MTLRenderCommandEncoder) {
+    func draw(_ commandEncoder: MTLRenderCommandEncoder) {
         // device.makeCommandQueue().makeCommandBuffer().make
     }
 }

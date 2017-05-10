@@ -18,13 +18,13 @@ class LevelScene {
     var touchRecognizer: TouchRecognizer
     
     init(context: InitContext) {
-        let notePipeline = Note.makePipeline(context: context)
+        let notePipeline = Note.makePipeline(context)
         noteRenderer = Note(pipeline: notePipeline)
         
-        let shieldPipeline = Shield.makePipeline(context: context)
+        let shieldPipeline = Shield.makePipeline(context)
         shieldRenderer = Shield(pipeline: shieldPipeline)
         
-        let gridPipeline = BackgroundGrid.makePipeline(context: context)
+        let gridPipeline = BackgroundGrid.makePipeline(context)
         gridRenderer = BackgroundGrid(pipeline: gridPipeline, windowProps: context.windowProps)
         
         let gameState = GameState("oban")
@@ -45,15 +45,15 @@ class LevelScene {
         )
     }
     
-    func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4) {
+    func draw(_ context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4) {
         let windowProps = context.windowProps
         
         let aspectRatio = Float(windowProps.width) / Float(windowProps.height)
         let elapsedTime = context.presentationTimestamp - gameState.startTimestamp
-        let noteVelocity: Float = 4.0
+        let noteVelocity: Float = 10.0
         
         gridRenderer.draw(
-            context: context,
+            context,
             projectionMatrix: projectionMatrix,
             viewMatrix: viewMatrix,
             modelMatrix: float4x4(diagonal: float4(1.0))
@@ -77,7 +77,7 @@ class LevelScene {
             }
             
             noteRenderer.draw(
-                context: context,
+                context,
                 color: color,
                 projectionMatrix: projectionMatrix,
                 viewMatrix: viewMatrix,
@@ -94,7 +94,7 @@ class LevelScene {
             let color = shield == .left ? float4(1.0, 0.0, 0.0, 0.5) : float4(0.0, 0.0, 1.0, 0.5)
             
             shieldRenderer.draw(
-                context: context,
+                context,
                 color: color,
                 projectionMatrix: projectionMatrix,
                 viewMatrix: viewMatrix,

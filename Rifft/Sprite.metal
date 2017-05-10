@@ -28,8 +28,8 @@ struct SpriteUniformData {
 };
 
 vertex SpriteVertexOut spriteVertex(uint vid [[ vertex_id ]],
-                              device SpriteVertexIn *vertices  [[ buffer(0) ]],
-                              constant SpriteUniformData *uniforms [[ buffer(1) ]])
+                                    device SpriteVertexIn *vertices  [[ buffer(0) ]],
+                                    constant SpriteUniformData *uniforms [[ buffer(1) ]])
 {
     SpriteVertexOut outVertex;
     

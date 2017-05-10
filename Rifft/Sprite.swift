@@ -17,21 +17,21 @@ class Sprite {
     var pipeline: MTLRenderPipelineState
     var depthState: MTLDepthStencilState
     
-    static func makePipeline(context: InitContext) -> MTLRenderPipelineState {
+    static func makePipeline(_ context: InitContext) -> MTLRenderPipelineState {
         let device = context.device
         let windowProps = context.windowProps
         
-        let fragmentProgram = context.functionCache.getFunction(name: "spriteFragment")
-        let vertexProgram = context.functionCache.getFunction(name: "spriteVertex")
+        let fragmentProgram = context.functionCache.getFunction("spriteFragment")
+        let vertexProgram = context.functionCache.getFunction("spriteVertex")
         
-        let spritePipelineDescriptor = MTLRenderPipelineDescriptor()
-        spritePipelineDescriptor.vertexFunction = vertexProgram
-        spritePipelineDescriptor.fragmentFunction = fragmentProgram
-        spritePipelineDescriptor.colorAttachments[0].pixelFormat = windowProps.colorPixelFormat
-        spritePipelineDescriptor.sampleCount = windowProps.sampleCount
-        spritePipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexProgram
+        pipelineDescriptor.fragmentFunction = fragmentProgram
+        pipelineDescriptor.colorAttachments[0].pixelFormat = windowProps.colorPixelFormat
+        pipelineDescriptor.sampleCount = windowProps.sampleCount
+        pipelineDescriptor.depthAttachmentPixelFormat = windowProps.depthPixelFormat
         
-        return try! device.makeRenderPipelineState(descriptor: spritePipelineDescriptor)
+        return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     
     init(pipeline: MTLRenderPipelineState, texture: MTLTexture) {
@@ -62,7 +62,7 @@ class Sprite {
         self.depthState = device.makeDepthStencilState(descriptor: depthDescriptor)
     }
     
-    func draw(context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
+    func draw(_ context: RenderContext, projectionMatrix: float4x4, viewMatrix: float4x4, modelMatrix: float4x4) {
         let commandEncoder = context.commandEncoder
         
         struct SpriteUniforms {
@@ -77,7 +77,7 @@ class Sprite {
             viewMatrix: viewMatrix,
             modelMatrix: modelMatrix
         )
-        let uniformBuffer = context.constantBufferPool.createBuffer(data: uniforms)
+        let uniformBuffer = context.constantBufferPool.createBuffer(uniforms)
         
         commandEncoder.setRenderPipelineState(pipeline)
         commandEncoder.setDepthStencilState(depthState)
