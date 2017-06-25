@@ -23,7 +23,7 @@ func getOnsetListFromMusic(_ musicUrl: URL) throws -> [Onset] {
     let fftLength = 10 // 1024 == 2 ^ 10
     let sampleRate = 44100
     let meanWindowSize = 31
-    let meanWindowScale = 1.8 / Float(meanWindowSize)
+    let meanWindowScale = 1.5 / Float(meanWindowSize)
     
     let settings: [String: Int] = [
         AVFormatIDKey: Int(kAudioFormatLinearPCM),

@@ -33,6 +33,9 @@
 		C12F2C021E4CC80F001E0B68 /* TouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */; };
 		C199F6851EC3561A00C50ED4 /* lemon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C199F6841EC3561A00C50ED4 /* lemon.mp3 */; };
 		C1A456151EC23EC200137B1C /* OnsetDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A456141EC23EC200137B1C /* OnsetDetection.swift */; };
+		C1D470B51EFF060300801F4A /* dragon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1D470B41EFF060300801F4A /* dragon.mp3 */; };
+		C1D470B71EFFD25200801F4A /* LevelGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D470B61EFFD25200801F4A /* LevelGeneration.swift */; };
+		C1D470B91EFFFD0800801F4A /* necro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1D470B81EFFFD0800801F4A /* necro.mp3 */; };
 		C1E4F14B1E4CE6DE00D6584C /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4F14A1E4CE6DE00D6584C /* Shield.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,9 @@
 		C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchRecognizer.swift; sourceTree = "<group>"; };
 		C199F6841EC3561A00C50ED4 /* lemon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lemon.mp3; sourceTree = "<group>"; };
 		C1A456141EC23EC200137B1C /* OnsetDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnsetDetection.swift; sourceTree = "<group>"; };
+		C1D470B41EFF060300801F4A /* dragon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dragon.mp3; sourceTree = "<group>"; };
+		C1D470B61EFFD25200801F4A /* LevelGeneration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGeneration.swift; sourceTree = "<group>"; };
+		C1D470B81EFFFD0800801F4A /* necro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = necro.mp3; sourceTree = "<group>"; };
 		C1E4F14A1E4CE6DE00D6584C /* Shield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +129,8 @@
 		C1052AE81E490DEB004BBCDE /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C1D470B81EFFFD0800801F4A /* necro.mp3 */,
+				C1D470B41EFF060300801F4A /* dragon.mp3 */,
 				C199F6841EC3561A00C50ED4 /* lemon.mp3 */,
 				C12F2BFB1E4C9B2C001E0B68 /* oban.mp3 */,
 				C1052AE91E490E63004BBCDE /* Mushroom.png */,
@@ -158,6 +166,7 @@
 				C1052AF61E4B8747004BBCDE /* Sprite.swift */,
 				C12F2C011E4CC80F001E0B68 /* TouchRecognizer.swift */,
 				C1A456141EC23EC200137B1C /* OnsetDetection.swift */,
+				C1D470B61EFFD25200801F4A /* LevelGeneration.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -238,8 +247,10 @@
 				C1052AD91E490CB9004BBCDE /* LaunchScreen.storyboard in Resources */,
 				C199F6851EC3561A00C50ED4 /* lemon.mp3 in Resources */,
 				C1052AEA1E490E63004BBCDE /* Mushroom.png in Resources */,
+				C1D470B51EFF060300801F4A /* dragon.mp3 in Resources */,
 				C1052AD61E490CB9004BBCDE /* Assets.xcassets in Resources */,
 				C1052AF31E4B73DD004BBCDE /* oban.json in Resources */,
+				C1D470B91EFFFD0800801F4A /* necro.mp3 in Resources */,
 				C12F2BFC1E4C9B2C001E0B68 /* oban.mp3 in Resources */,
 				C1052AD41E490CB9004BBCDE /* Main.storyboard in Resources */,
 			);
@@ -254,6 +265,7 @@
 			files = (
 				C1E4F14B1E4CE6DE00D6584C /* Shield.swift in Sources */,
 				C1052AF71E4B8747004BBCDE /* Sprite.swift in Sources */,
+				C1D470B71EFFD25200801F4A /* LevelGeneration.swift in Sources */,
 				C1052AD11E490CB9004BBCDE /* Sprite.metal in Sources */,
 				C1052AEC1E492FE2004BBCDE /* simd+ext.swift in Sources */,
 				C1052AE11E490CC4004BBCDE /* ConstantBufferPool.swift in Sources */,
